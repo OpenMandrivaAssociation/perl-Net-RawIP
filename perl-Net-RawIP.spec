@@ -2,15 +2,15 @@
 
 Summary:	Net::RawIP - a perl module can to manipulate raw IP packets
 Name:		perl-%{pkgname}
-Version:	0.2
-Release:    %mkrel 3
+Version:	0.21
+Release:    %mkrel 1
 License:	GPL or Artistic
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{pkgname}/
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{pkgname}-%{version}.tar.bz2
-Patch0:		Net-RawIP-0.2-nolvaluecast.patch
 BuildRequires:	perl-devel
 BuildRequires:	libpcap-devel
+BuildRequires:  perl(List::MoreUtils)
 Buildroot:	%{_tmppath}/%{name}-buildroot
 
 %description
@@ -20,7 +20,6 @@ with an optional feature for manipulating Ethernet headers.
 %prep
 
 %setup -q -n %{pkgname}-%{version}
-%patch0 -p0 -b .nolvaluecast
 
 # fix attribs
 find . -type d -exec chmod 755 {} \;
@@ -29,6 +28,8 @@ find . -type f -exec chmod 644 {} \;
 # strip away annoying ^M
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
+
+perl -pi -e 's!/usr/lib!%{_libdir}!g' Makefile.PL
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
