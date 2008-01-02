@@ -11,6 +11,7 @@ Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{pkgname}-%{version}
 BuildRequires:	perl-devel
 BuildRequires:	libpcap-devel
 BuildRequires:  perl(List::MoreUtils)
+Buildroot:	%{_tmppath}/%{name}-buildroot
 
 %description
 This is Net::RawIP, a perl module can to manipulate raw IP packets,
