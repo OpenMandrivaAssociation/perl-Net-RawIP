@@ -2,12 +2,12 @@
 
 Summary:	Net::RawIP - a perl module can to manipulate raw IP packets
 Name:		perl-%{pkgname}
-Version:	0.24
-Release:    %mkrel 2
+Version:	0.25
+Release:    %mkrel 1
 License:	GPL or Artistic
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{pkgname}/
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{pkgname}-%{version}.tar.bz2
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{pkgname}-%{version}.tar.gz
 BuildRequires:	perl-devel
 BuildRequires:	libpcap-devel
 BuildRequires:  perl(List::MoreUtils)
