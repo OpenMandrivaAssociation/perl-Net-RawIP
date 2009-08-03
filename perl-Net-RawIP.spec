@@ -1,25 +1,27 @@
-%define pkgname Net-RawIP
+%define upstream_name    Net-RawIP
+%define upstream_version 0.25
+
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
 Summary:	Net::RawIP - a perl module can to manipulate raw IP packets
-Name:		perl-%{pkgname}
-Version:	0.25
-Release:    %mkrel 1
-License:	GPL or Artistic
+License:	GPL+ or Artistic
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/%{pkgname}/
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{pkgname}-%{version}.tar.gz
-BuildRequires:	perl-devel
+Url:		http://search.cpan.org/dist/%{upstream_name}/
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Net/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires:	libpcap-devel
 BuildRequires:  perl(List::MoreUtils)
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	perl-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This is Net::RawIP, a perl module can to manipulate raw IP packets,
 with an optional feature for manipulating Ethernet headers.
 
 %prep
-
-%setup -q -n %{pkgname}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 # fix attribs
 find . -type d -exec chmod 755 {} \;
@@ -33,7 +35,6 @@ perl -pi -e 's!/usr/lib!%{_libdir}!g' Makefile.PL
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
-
 %make
 
 %check
@@ -41,7 +42,6 @@ make test
 
 %install
 rm -rf %{buildroot}
-
 %makeinstall_std
 
 %clean
@@ -53,4 +53,3 @@ rm -rf %{buildroot}
 %{perl_vendorarch}/auto/Net
 %{perl_vendorarch}/Net
 %{_mandir}/*/*
-
